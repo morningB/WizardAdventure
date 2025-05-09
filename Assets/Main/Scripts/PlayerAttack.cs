@@ -22,6 +22,12 @@ public class PlayerAttack : MonoBehaviour
         GetComponent<Animator>().SetBool("bMove", true);
         if(Physics.Raycast(ray,out hit, 100, LayerMask.GetMask("Shootable")))
         {
+            // 방패에 맞았는지 확인
+            if (hit.collider.CompareTag("Shield"))
+            {
+                Debug.Log("방패에 막힘!");
+                return; // 데미지 무효
+            }
             EnemyHealth e = hit.collider.GetComponent<EnemyHealth>();
             if(e != null)
             {

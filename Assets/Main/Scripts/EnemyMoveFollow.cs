@@ -1,19 +1,20 @@
-using UnityEngine;
-using UnityEngine.AI;
+// using UnityEngine;
+// using UnityEngine.AI;
 
-public class EnemyMoveFollow : MonoBehaviour
-{
-    Transform playerTrans;
-    NavMeshAgent nav;
-    void Start()
-    {
-        playerTrans = GameObject.Find("Player").transform;
-        nav = GetComponent<NavMeshAgent>();
-    }
+// public class EnemyMoveFollow : MonoBehaviour
+// {
+//     Transform playerTrans;
+//     NavMeshAgent nav;
+//     void Start()
+//     {
+//         playerTrans = GameObject.Find("Player").transform;
+//         nav = GetComponent<NavMeshAgent>();
+//     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        nav.SetDestination(playerTrans.position);
-    }
-}
+//     // Update is called once per frame
+//     void Update()
+//     {
+//         if(nav != null)
+//             nav.SetDestination(playerTrans.position);
+//     }
+// }

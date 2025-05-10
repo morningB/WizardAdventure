@@ -3,18 +3,19 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform target; // ÇÃ·¹ÀÌ¾î
+    private Transform target; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½
     private NavMeshAgent agent;
     private Animator animator;
 
     public float followDistance = 10f;
-    public float attackDistance = 2.5f;
+    public float attackDistance = 1.5f;
 
     private enum State { Idle, Follow, Attack }
     private State currentState;
 
     void Start()
     {
+        target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         currentState = State.Idle;
@@ -22,9 +23,21 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        float dist = Vector3.Distance(transform.position, target.position);
+        if(GetComponent<EnemyHealth>().isDead) return;
+        
+        if(target == null)
+        {
+            currentState = State.Idle;
 
-        // »óÅÂ ÀüÀÌ
+            agent.isStopped = true;
+            animator.SetBool("bMove", false);
+            animator.SetBool("Attack", false); // ì• ë‹ˆë©”ì´ì…˜ ìž¬ìƒ ë°©ì§€
+            return;
+        }
+        else{
+            float dist = Vector3.Distance(transform.position, target.position);
+
+        // 
         if (dist > followDistance)
             currentState = State.Idle;
         else if (dist > attackDistance)
@@ -32,7 +45,9 @@ public class EnemyAI : MonoBehaviour
         else
             currentState = State.Attack;
 
-        // »óÅÂº° Çàµ¿
+        
+        }
+        
         switch (currentState)
         {
             case State.Idle:
@@ -49,7 +64,7 @@ public class EnemyAI : MonoBehaviour
 
             case State.Attack:
                 agent.isStopped = true;
-                transform.LookAt(target); // °ø°Ý ¹æÇâ
+                transform.LookAt(target); 
                 animator.SetBool("bMove", false);
                 animator.SetBool("Attack", true);
                 break;

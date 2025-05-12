@@ -52243,7 +52243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2958742602922316363, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
       propertyPath: hp
-      value: 100
+      value: 11111111
       objectReference: {fileID: 0}
     - target: {fileID: 2958742602922316363, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
       propertyPath: imgBar
@@ -53382,7 +53382,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: bc753cd062c0a9641969fcf8a385c20a, type: 3}
   m_Resource: {fileID: 8300000, guid: bc753cd062c0a9641969fcf8a385c20a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.217
+  m_Volume: 0.077
   m_Pitch: 1
   Loop: 0
   Mute: 0

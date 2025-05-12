@@ -8,9 +8,19 @@ public class EnemyHealth : MonoBehaviour
     public int hp = 100;
      public RawImage imgBar;
     public AudioClip acp;
+    public AudioClip audioShield;
+     public GameObject shieldObject; // Inspector에서 할당하거나 Start에서 Find
+
     public void Damage(int amount)
     {
         if(hp <= 0 || isDead)return;
+
+         if (shieldObject != null && shieldObject.activeInHierarchy)
+        {
+            Debug.Log("방패가 있어서 대미지를 막음");
+            GetComponent<AudioSource>().PlayOneShot(audioShield);
+            return;
+        }
 
         hp -= amount;
         imgBar.transform.localScale = new Vector3(hp/ 100.0f,1,1);

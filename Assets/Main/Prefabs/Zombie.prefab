@@ -576,6 +576,8 @@ MonoBehaviour:
   hp: 100
   imgBar: {fileID: 2470441460557037305}
   acp: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+  audioShield: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}
+  shieldObject: {fileID: 919132149155446097, guid: 564dad649c6ef7f4b8d09bf439acb87b, type: 3}
 --- !u!64 &351344636231021294
 MeshCollider:
   m_ObjectHideFlags: 0

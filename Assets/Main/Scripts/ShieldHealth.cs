@@ -14,11 +14,27 @@ public class ShieldHealth : MonoBehaviour
     {
         currentHp -= amount;
         Debug.Log($"방패 체력: {currentHp}");
-        GetComponent<AudioSource>().PlayOneShot(audioClip);
+        
         if (currentHp <= 0)
         {
+            GetComponent<AudioSource>().PlayOneShot(audioClip);
             Debug.Log("방패 파괴");
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+       if(other.tag == "Attack")
+       {
+            Fireball fireball = other.GetComponent<Fireball>();
+            if (fireball != null)
+            {
+                Damage(fireball.damage);
+            }
+            Destroy(other.gameObject); // 공격 오브젝트 제거
+       }
+        
     }
 }

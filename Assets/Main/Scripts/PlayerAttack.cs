@@ -8,7 +8,9 @@ public class PlayerAttack : MonoBehaviour
     Transform shootPoint;
     public GameObject FirBallEffect;
     public GameObject fireballPrefab;
-      
+    public AudioClip audioClip;
+    public AudioClip FireAudio;
+
     void Start()
     {
         line = GetComponent<LineRenderer>();
@@ -19,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     {
          // 발사 애니메이션 트리거
         GetComponent<Animator>().SetTrigger("Attack");
-
+        GetComponent<AudioSource>().PlayOneShot(audioClip);
         // 발사체 생성
         GameObject fireball = Instantiate(fireballPrefab, shootPoint.position, shootPoint.rotation);
 
@@ -34,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 fb.damage = 100;
                 Instantiate(FirBallEffect, shootPoint.position, shootPoint.rotation);
-                
+                GetComponent<AudioSource>().PlayOneShot(FireAudio);
             }
                 
         }

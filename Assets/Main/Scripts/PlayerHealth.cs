@@ -6,10 +6,19 @@ public class PlayerHealth : MonoBehaviour
     Vector3 posRespawn;
     public RawImage imgBar;
     private bool isPlayerDead = false;
+    public Slider sliderHP;
+    public AudioClip audioClip;
     void Start()
+{
+    posRespawn = transform.position;
+
+    if (sliderHP != null)
     {
-        posRespawn = transform.position; // 시작위치
+        sliderHP.minValue = 0;
+        sliderHP.maxValue = 100;
+        sliderHP.value = hp;
     }
+}
 
     public void SetHP(int value)
     {
@@ -17,17 +26,19 @@ public class PlayerHealth : MonoBehaviour
         return;
         hp = value;
         imgBar.transform.localScale = new Vector3(hp/100.0f,1,1);
+        sliderHP.value = hp;
     }
     public void Respawn()
     {
         hp = 100;
         transform.position = posRespawn;
         GetComponent<Animator>().SetTrigger("Respawn");
-        
+        GetComponent<AudioSource>().PlayOneShot(audioClip);
         GetComponent<PlayerController>().enabled = true;
         GetComponent<PlayerAttack>().enabled = true;
 
         imgBar.transform.localScale = new Vector3(1,1,1);
+        sliderHP.value = hp;
     }
     public void Damage(int amount)
     {
@@ -36,6 +47,8 @@ public class PlayerHealth : MonoBehaviour
         hp -= amount;
         Debug.Log("player : "+hp);
         imgBar.transform.localScale = new Vector3(hp / 100.0f, 1,1);
+        sliderHP.value = hp;
+        
         
         if(hp <= 0)
         {
@@ -45,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
             GetComponent<PlayerController>().enabled = false;
             GetComponent<PlayerAttack>().enabled = false;
             
-            Invoke("Respawn", 3);
+            Invoke("Respawn", 2);
         }
     }
 

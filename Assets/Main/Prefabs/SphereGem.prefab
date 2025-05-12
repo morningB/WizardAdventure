@@ -153,3 +153,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   lifeTime: 5
+  audioClip: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}

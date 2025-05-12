@@ -31,7 +31,7 @@ public class EnemyAttack : MonoBehaviour
         void Update()
         {
             time += Time.deltaTime;
-             if(time >= attackInterval && bInRange)
+        if(time >= attackInterval && bInRange)
         {
             time = 0;
             Debug.Log("좀비가 공격함");

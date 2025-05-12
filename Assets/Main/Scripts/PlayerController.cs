@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -13,11 +14,14 @@ public class PlayerController : MonoBehaviour
 
     public Transform cam; // 카메라 Transform
     public Joystick joy;
-
+     public AudioClip acp;
+   
+      float time;
     void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        time = 0;
     }
     // UI 버튼에 연결되는 메서드 (onClick에 연결)
     public void StartRunning()
@@ -54,6 +58,23 @@ public class PlayerController : MonoBehaviour
         }
         if (isMoving)
         {
+             time += Time.deltaTime;
+            if(isRunning){
+                if(time>0.2f)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(acp);
+                    time = 0;
+                }
+                
+            }
+            else 
+            {
+                if(time>0.6f)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(acp);
+                    time = 0;
+                }
+            }
             // 카메라 기준으로 입력 방향 변환
             Vector3 camForward = cam.forward;
             Vector3 camRight = cam.right;

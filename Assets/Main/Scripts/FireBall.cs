@@ -4,7 +4,7 @@ public class Fireball : MonoBehaviour
 {
     public int damage = 25;
     public float lifeTime = 5f;
-
+    public AudioClip audioClip;
     
     void Start()
     {
@@ -51,6 +51,7 @@ public class Fireball : MonoBehaviour
 
             if (shield != null)
             {
+                 GetComponent<AudioSource>().PlayOneShot(audioClip);
                 shield.Damage(damage);
                 Debug.Log("방패에 막힘");
             }

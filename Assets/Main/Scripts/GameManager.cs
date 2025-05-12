@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject targetZone; // 최종 지역 오브젝트
     public Text targetZoneText;
-
+    public AudioClip audioClip;
     void Awake()
     {
         if (instance == null) instance = this;
@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         targetZoneText.gameObject.SetActive(true);
         targetZoneText.text = "탈출 포탈이 산 정상에 생성되었습니다!!";
+        GetComponent<AudioSource>().PlayOneShot(audioClip);
         yield return new WaitForSeconds(3f);
         targetZoneText.gameObject.SetActive(false);
     }

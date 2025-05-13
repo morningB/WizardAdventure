@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public int hp = 100;
+    public int entireHp = 3;
+
+    public GameObject[] lifeIcons; // UI에서 3개의 생명 아이콘을 할당
     Vector3 posRespawn;
     public RawImage imgBar;
     private bool isPlayerDead = false;
@@ -14,8 +18,6 @@ public class PlayerHealth : MonoBehaviour
 
     if (sliderHP != null)
     {
-        sliderHP.minValue = 0;
-        sliderHP.maxValue = 100;
         sliderHP.value = hp;
     }
 }
@@ -30,15 +32,29 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Respawn()
     {
-        hp = 100;
-        transform.position = posRespawn;
-        GetComponent<Animator>().SetTrigger("Respawn");
-        GetComponent<AudioSource>().PlayOneShot(audioClip);
-        GetComponent<PlayerController>().enabled = true;
-        GetComponent<PlayerAttack>().enabled = true;
+        if(entireHp > 0)
+        {
+            hp = 100;
+            entireHp--;
+            // 생명 아이콘 제거
+            if (entireHp < lifeIcons.Length && lifeIcons[entireHp] != null)
+                lifeIcons[entireHp].SetActive(false);
 
-        imgBar.transform.localScale = new Vector3(1,1,1);
-        sliderHP.value = hp;
+            transform.position = posRespawn;
+            GetComponent<Animator>().SetTrigger("Respawn");
+            GetComponent<AudioSource>().PlayOneShot(audioClip);
+            GetComponent<PlayerController>().enabled = true;
+            GetComponent<PlayerAttack>().enabled = true;
+
+            imgBar.transform.localScale = new Vector3(1,1,1);
+            sliderHP.value = hp;
+            isPlayerDead = false;
+        }
+        else
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        
     }
     public void Damage(int amount)
     {

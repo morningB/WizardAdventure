@@ -34,8 +34,8 @@ public class EnemyHealth : MonoBehaviour
             GetComponent<Animator>().SetTrigger("Death");
             GetComponent<AudioSource>().PlayOneShot(acp);
             GetComponent<NavMeshAgent>().enabled = false;
-            GetComponent<MeshCollider>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<EnemyAttack>().enabled = false;
+
             Destroy(gameObject,1.5f);
             
             GameObject.Find("GameManager").GetComponent<Spawner>().count--;

@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
      public RawImage imgBar;
     public AudioClip acp;
     public AudioClip audioShield;
-     public GameObject shieldObject; // Inspector에서 할당하거나 Start에서 Find
+    public GameObject shieldObject; // Inspector에서 할당하거나 Start에서 Find
 
     public void Damage(int amount)
     {

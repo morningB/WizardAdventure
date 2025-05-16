@@ -3,43 +3,44 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     GameObject player;
-        float time;
-        bool bInRange;
+    float time;
+    bool bInRange;
+    
+    public float attackInterval = 1.0f;
+    public int damage = 20;
+    void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
-         public float attackInterval = 1.0f;
-        public int damage = 20;
-        void Start()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == player )
         {
-            player = GameObject.Find("Player");
+            bInRange = true;
+            Debug.Log("좀비의 공격 성공");
         }
-
-        private void OnTriggerEnter(Collider other)
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == player)
         {
-            if(other.gameObject == player)
-            {
-                bInRange = true;
-                Debug.Log("좀비의 공격 성공");
-            }     
+            bInRange = false;
         }
-        private void OnTriggerExit(Collider other) 
-        {
-            if(other.gameObject == player)
-            {
-                bInRange = false;
-            }     
-        }
-        void Update()
-        {
-            time += Time.deltaTime;
-        if(time >= attackInterval && bInRange)
+    }
+    void Update()
+    {
+        time += Time.deltaTime;
+        if (time >= attackInterval && bInRange)
         {
             time = 0;
             Debug.Log("좀비가 공격함");
-            player.GetComponent<PlayerHealth>().Damage(50);
-            if(player.GetComponent<PlayerHealth>().hp <= 0)
-            {
-                GetComponent<Animator>().SetTrigger("Death");
-            }
+            player.GetComponent<PlayerHealth>().Damage(damage);
+
+            // if (player.GetComponent<PlayerHealth>().hp <= 0)
+            // {
+            //     GetComponent<Animator>().SetTrigger("Death");
+            // }
         }
-        }
+    }
 }

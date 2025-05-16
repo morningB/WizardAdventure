@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public Transform cam; // 카메라 Transform
     public Joystick joy;
-     public AudioClip acp;
+    public AudioClip acp;
    
-      float time;
+    float time;
     void Awake()
     {
         animator = GetComponent<Animator>();
